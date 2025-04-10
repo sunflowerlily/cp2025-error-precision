@@ -1,0 +1,74 @@
+{ // 移除了文件开头的空行
+  "tests": [
+    {
+      "name": "Setup Environment",
+      "setup": "sudo -H pip install -r requirements.txt && sudo -H pip install pytest",
+      "run": "echo 'Setup complete. Running tests...'",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 5,
+      "points": 1 # 确保环境设置成功
+    },
+    {
+      "name": "Exp1: Quadratic Roots Tests",
+      "setup": "",
+      "run": "pytest Exp1_QuadraticRoots/tests/test_quadratic.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 15 # 分配分数
+    },
+    {
+      "name": "Exp2: Numerical Differentiation Tests",
+      "setup": "",
+      "run": "pytest Exp2_NumericalDifferentiation/tests/test_differentiation.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Exp3: Numerical Integration Tests",
+      "setup": "",
+      "run": "pytest Exp3_NumericalIntegration/tests/test_integration.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Exp4: Harmonic Sum Tests",
+      "setup": "",
+      "run": "pytest Exp4_HarmonicSum/tests/test_harmonic.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 14 # 微调使总分接近100
+    },
+    {
+      "name": "Exp5: Series Comparison Tests",
+      "setup": "",
+      "run": "pytest Exp5_SeriesComparison/tests/test_series.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 20 # 这个实验对比更强，分值可以高些
+    },
+    {
+      "name": "Exp6: Bessel Recursion Tests",
+      "setup": "",
+      "run": "pytest Exp6_BesselRecursion/tests/test_bessel.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 15, # 可能需要 scipy，稍长一点
+      "points": 20 # 这个概念也很重要
+    }
+  ]
+}
