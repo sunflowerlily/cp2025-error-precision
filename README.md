@@ -48,52 +48,66 @@
 
 ## 操作指南
 
-(与上一版本类似，包括克隆、环境设置、完成实验、本地测试、撰写报告、提交步骤)
-```bash
-# 克隆
-git clone <your-repository-url>
-cd ComputationalPhysics_Errors_Precision_Assignment
+## 操作指南
 
-# 环境 (建议使用 venv)
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-# venv\Scripts\activate  # Windows
-pip install -r requirements.txt
-
-# 本地测试 (可选)
-pip install pytest
-pytest Exp1_QuadraticRoots/tests/
-pytest Exp2_NumericalDifferentiation/tests/
-# ... etc for all experiments
-
-# 提交
-git add .
-git commit -m "Completed experiments"
-git push origin main
-```
-## 实验报告要求
-建议为每个实验撰写独立的小结，或在一个总报告中为每个实验设立清晰的部分。每部分应包含：
-
-- 目的: 简述该实验要探究的问题。
-- 方法: 描述所用数值方法和关键实现细节。
-- 结果: 展示计算数据、表格、图像等。
-- 分析与讨论: 解释观察到的现象，与误差理论联系，讨论精度、稳定性问题。例如，解释误差来源、比较不同方法/参数/精度的优劣、说明“危害”体现在哪里。
-- 结论: 总结该实验的主要发现。
+1.  **接受作业:** 通过 GitHub Classroom 提供的链接接受本次作业，这将为你创建一个私有的代码仓库。
+2.  **克隆仓库:** 将你的作业仓库克隆到本地计算机。
+    ```bash
+    git clone <your-repository-url>
+    cd ComputationalPhysics_Errors_Assignment
+    ```
+3.  **环境设置:** 确保你安装了所需的 Python 库。建议使用虚拟环境。
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # Linux/macOS
+    # venv\Scripts\activate  # Windows
+    pip install -r requirements.txt
+    ```
+4.  **完成实验:**
+    *   仔细阅读每个实验目录下的 `README.md` 文件，理解实验要求。
+    *   在对应的 `.py` 文件（学生代码模板）中填充代码。模板中通常会标出 `### YOUR CODE HERE ###` 或类似标记。
+    *   运行你的代码，生成结果（可能需要绘图或打印数值）。
+    *   (可选) 在本地运行测试代码，检查你的实现是否基本正确：
+        ```bash
+        pip install pytest
+        pytest Exp1_CatastrophicCancellation/tests/
+        pytest Exp2_NumericalDifferentiation/tests/
+        pytest Exp3_ODE_Stability/tests/
+        ```
+5.  **撰写实验报告:** 根据每个实验 `README.md` 中的要求，撰写实验报告。报告可以是一个 Markdown 文件 (`REPORT.md`) 或 PDF 文件，放在仓库的根目录下或每个实验目录下。报告应包含：实验目的、方法简述、代码关键部分（如果需要）、结果（表格、图像）、误差分析、讨论和结论。
+6.  **提交作业:**
+    *   将你修改过的代码文件 (`.py`) 和实验报告文件添加到 Git暂存区：
+        ```bash
+        git add Exp*/ *.py
+        git add REPORT.md  # 或者其他报告文件
+        ```
+    *   提交更改：
+        ```bash
+        git commit -m "完成实验内容"
+        ```
+    *   推送到 GitHub：
+        ```bash
+        git push origin main
+        ```
+    *   确保在截止日期前完成推送。GitHub Classroom 会自动记录你最后一次推送的版本。
 
 ## 评分
-- 自动评分 (Autograding): 通过 GitHub Classroom 运行 tests/ 目录下的测试，检查代码功能和数值输出的准确性（在允许的误差范围内）。
-- 手动评分: 教师/助教将审阅代码质量、实验报告的完整性、分析深度、图表清晰度及结论的合理性。
+
+*   **自动评分 (Autograding):** GitHub Classroom 会自动运行每个实验 `tests/` 目录下的测试代码。这些测试主要检查你的函数是否返回了预期范围内的数值结果。自动评分结果会直接显示在 GitHub Classroom 界面上。
+*   **手动评分:** 教师/助教将审阅你的代码逻辑、代码风格、实验报告的完整性、分析的深度和结论的合理性。最终成绩将结合自动评分和手动评分。
 
 ## 截止日期
-[在此处填写具体的截止日期和时间]
+
+**[在此处填写具体的截止日期和时间]**
 
 ## 资源
-课堂讲义/笔记
-NumPy 文档: https://numpy.org/doc/stable/
-Matplotlib 文档: https://matplotlib.org/stable/contents.html
-SciPy 文档 (用于参考值): https://docs.scipy.org/doc/scipy/reference/
-经典教材，如 Newman 的《Computational Physics》或 Press 等人的《Numerical Recipes》。
-祝大家实验顺利，在实践中掌握误差分析的精髓！
+
+*   课堂笔记/讲义中关于数值误差、数值微分、ODE求解的部分。
+*   NumPy 官方文档: [https://numpy.org/doc/stable/](https://numpy.org/doc/stable/)
+*   Matplotlib 官方文档: [https://matplotlib.org/stable/contents.html](https://matplotlib.org/stable/contents.html)
+*   浮点数运算参考: What Every Computer Scientist Should Know About Floating-Point Arithmetic ([https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html))
+
+祝你实验顺利，深入理解数值计算的奥秘！
 
 ## 目录结构
 ```
