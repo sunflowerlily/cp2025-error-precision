@@ -60,7 +60,7 @@ def main():
         roots1 = standard_formula(a, b, c)
         print("\n方法1（标准公式）的结果：")
         if roots1:
-            print("x1 = {:.15f}\nx2 = {:.15f}".format(roots1[0], roots1[1]))
+            print("x1 = {:.15f}, x2 = {:.15f}".format(roots1[0], roots1[1]))
         else:
             print("无实根")
         
@@ -68,7 +68,7 @@ def main():
         roots2 = alternative_formula(a, b, c)
         print("\n方法2（替代公式）的结果：")
         if roots2:
-            print("x1 = {:.15f}\nx2 = {:.15f}".format(roots2[0], roots2[1]))
+            print("x1 = {:.15f}, x2 = {:.15f}".format(roots2[0], roots2[1]))
         else:
             print("无实根")
         
@@ -76,7 +76,7 @@ def main():
         roots3 = stable_formula(a, b, c)
         print("\n方法3（稳定求根程序）的结果：")
         if roots3:
-            print("x1 = {:.15f}\nx2 = {:.15f}".format(roots3[0], roots3[1]))
+            print("x1 = {:.15f}, x2 = {:.15f}".format(roots3[0], roots3[1]))
         else:
             print("无实根")
 
