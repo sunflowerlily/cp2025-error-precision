@@ -4,7 +4,8 @@ import os
 from pathlib import Path
 
 # 添加solution目录到Python路径
-sys.path.insert(0, str(Path(__file__).parent.parent / 'solution'))
+#sys.path.insert(0, str(Path(__file__).parent.parent / 'solution'))
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from quadratic_solver import standard_formula, alternative_formula, stable_formula
 
 def test_standard_formula():
