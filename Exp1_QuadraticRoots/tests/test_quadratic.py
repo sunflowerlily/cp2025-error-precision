@@ -3,10 +3,10 @@ import sys
 import os
 from pathlib import Path
 
-# 添加solution目录到Python路径
-#sys.path.insert(0, str(Path(__file__).parent.parent / 'solution'))
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# 添加父目录到路径，以便导入学生代码
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from quadratic_solver import standard_formula, alternative_formula, stable_formula
+#from solution.quadratic_solver_solution import standard_formula, alternative_formula, stable_formula
 
 def test_standard_formula():
     """测试标准求根公式"""

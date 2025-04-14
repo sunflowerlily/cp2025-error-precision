@@ -5,8 +5,8 @@ import pytest
 
 # 添加父目录到路径，以便导入学生代码
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-#from harmonic_sum import sum_up, sum_down
-from solution.harmonic_sum_solution import sum_up, sum_down
+from harmonic_sum import sum_up, sum_down
+#from solution.harmonic_sum_solution import sum_up, sum_down
 
 def test_sum_up_basic():
     """测试sum_up基本功能"""

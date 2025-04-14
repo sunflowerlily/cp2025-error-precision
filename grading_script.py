@@ -5,6 +5,7 @@ import sys
 import pathlib
 import json
 import argparse
+import datetime
 
 # --- Configuration ---
 
@@ -235,7 +236,39 @@ def main():
          if any_failures:
               # sys.exit(1) # Uncomment if you want the script to signal failure
               pass
+    
+    # 在打印最终摘要后添加以下代码
+    print("\n" + "="*40)
+    
+    # 生成汇总文件
+    generate_summary_file(results_summary, total_earned_points, total_possible_points)
 
+def generate_summary_file(results, earned, possible):
+    """生成测试结果汇总文件(Markdown格式)"""
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    summary_file = pathlib.Path.cwd() / "grading_summary.md"
+    
+    with open(summary_file, 'w') as f:
+        # 写入标题和时间
+        f.write(f"# 实验评分报告\n\n")
+        f.write(f"**生成时间**: {timestamp}\n\n")
+        f.write(f"**总分**: {earned}/{possible}\n\n")
+        
+        # 写入表格标题
+        f.write("| 实验名称 | 状态 | 得分 | 退出代码 |\n")
+        f.write("|----------|------|------|----------|\n")
+        
+        # 写入每个实验的结果
+        for exp_name, result in results.items():
+            status = "✅ 通过" if result["status"] == "PASSED" else "❌ 失败"
+            score = f"{result['points_earned']}/{result['points_possible']}"
+            exit_code = result["exit_code"]
+            f.write(f"| {exp_name} | {status} | {score} | {exit_code} |\n")
+        
+        # 写入总结
+        f.write(f"\n**最终得分**: {earned}/{possible} ({round(earned/possible*100, 2)}%)\n")
+    
+    print(f"测试结果汇总已保存到: {summary_file}")
 
 if __name__ == "__main__":
     main()

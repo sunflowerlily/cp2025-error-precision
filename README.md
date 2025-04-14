@@ -111,11 +111,7 @@
 ```
 cp2025-error-precision/
 ├── README.md                 # 项目总说明
-├── .github/
-│   └── classroom/
-│       └── autograding.json  # GitHub自动评分配置
 ├── requirements.txt          # Python依赖包
-├── venv/                     # Python虚拟环境
 │
 ├── Exp1_QuadraticRoots/      # 实验一：二次方程求根
 │   ├── 实验说明.md           # 实验说明文档
