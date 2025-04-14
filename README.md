@@ -15,8 +15,6 @@
 5.  认识到简单求和顺序的改变如何影响舍入误差的累积。
 6.  理解数学上等价的表达式在数值计算中可能具有截然不同的稳定性和精度。
 7.  体验递推关系中的数值不稳定性，并了解稳定计算的策略。
-8.  熟练使用 Python (NumPy, Matplotlib, SciPy) 实现数值算法、进行误差分析和结果可视化。
-9.  利用 Git 和 GitHub Classroom 进行代码管理、协作（如有）与提交。
 
 ## 实验内容
 
@@ -64,7 +62,7 @@
     pip install -r requirements.txt
     ```
 4.  **完成实验:**
-    *   仔细阅读每个实验目录下的 `README.md` 文件，理解实验要求。
+    *   仔细阅读每个实验目录下的 `项目说明.md` 文件，理解实验要求。
     *   在对应的 `.py` 文件（学生代码模板）中填充代码。模板中通常会标出 `### YOUR CODE HERE ###` 或类似标记。
     *   运行你的代码，生成结果（可能需要绘图或打印数值）。
     *   (可选) 在本地运行测试代码，检查你的实现是否基本正确：
@@ -74,7 +72,7 @@
         pytest Exp2_NumericalDifferentiation/tests/
         pytest Exp3_ODE_Stability/tests/
         ```
-5.  **撰写实验报告:** 根据每个实验 `README.md` 中的要求，撰写实验报告。报告可以是一个 Markdown 文件 (`REPORT.md`) 或 PDF 文件，放在仓库的根目录下或每个实验目录下。报告应包含：实验目的、方法简述、代码关键部分（如果需要）、结果（表格、图像）、误差分析、讨论和结论。
+5.  **撰写实验报告:** 根据每个实验 `项目说明.md` 中的要求，撰写实验报告。报告可以是一个 Markdown 文件 (`实验报告.md`) 或 PDF 文件，放在仓库的根目录下或每个实验目录下。报告应包含：实验目的、方法简述、代码关键部分（如果需要）、结果（表格、图像）、误差分析、讨论和结论。
 6.  **提交作业:**
     *   将你修改过的代码文件 (`.py`) 和实验报告文件添加到 Git暂存区：
         ```bash
@@ -111,59 +109,65 @@
 
 ## 目录结构
 ```
-ComputationalPhysics_Errors_Precision/
-├── README.md                 # (总) 本周作业的总体说明
+cp2025-error-precision/
+├── README.md                 # 项目总说明
 ├── .github/
 │   └── classroom/
-│       └── autograding.json  # GitHub Classroom 自动评分配置文件
-├── grading_script.py         # (可选) 更复杂的本地评分脚本
-├── requirements.txt          # Python 依赖包 (numpy, matplotlib, scipy)
+│       └── autograding.json  # GitHub自动评分配置
+├── requirements.txt          # Python依赖包
+├── venv/                     # Python虚拟环境
 │
-├── Exp1_QuadraticRoots/
-│   ├── README.md             # 实验一：二次方程求根 说明
-│   ├── quadratic_solver.py   # 实验一：学生代码模板
+├── Exp1_QuadraticRoots/      # 实验一：二次方程求根
+│   ├── 实验说明.md           # 实验说明文档
+│   ├── 实验报告.md           # 实验报告文档（需完成）
+│   ├── quadratic_solver.py   # 学生代码模板（需实现）
+│   ├── solution/             # 参考答案
+│   │   └── quadratic_solver.py
+│   └── tests/                # 单元测试
+│       └── test_quadratic.py
+│
+├── Exp2_NumericalDifferentiation/  # 实验二：数值微分
+│   ├── 实验说明.md
+│   ├── 实验报告.md           # （需完成）
+│   ├── differentiation.py    # （需实现）
 │   ├── solution/
-│   │   └── quadratic_solver.py # 实验一：参考答案
+│   │   └── differentiation_solution.py
 │   └── tests/
-│       └── test_quadratic.py # 实验一：测试代码
+│       └── test_differentiation.py
 │
-├── Exp2_NumericalDifferentiation/
-│   ├── README.md             # 实验二：数值微分误差 说明
-│   ├── differentiation.py    # 实验二：学生代码模板
+├── Exp3_NumericalIntegration/     # 实验三：数值积分
+│   ├── 实验说明.md
+│   ├── 实验报告.md           # （需完成）
+│   ├── integration.py         # （需实现）
 │   ├── solution/
-│   │   └── differentiation.py # 实验二：参考答案
+│   │   └── integration_solution.py
 │   └── tests/
-│       └── test_differentiation.py # 实验二：测试代码
+│       └── test_integration.py
 │
-├── Exp3_NumericalIntegration/
-│   ├── README.md             # 实验三：数值积分误差 说明
-│   ├── integration.py        # 实验三：学生代码模板
+├── Exp4_HarmonicSum/             # 实验四：调和级数
+│   ├── 实验说明.md
+│   ├── 实验报告.md           # （需完成）
+│   ├── harmonic_sum.py       # （需实现）
 │   ├── solution/
-│   │   └── integration.py    # 实验三：参考答案
+│   │   └── harmonic_sum_solution.py
 │   └── tests/
-│       └── test_integration.py # 实验三：测试代码
+│       └── test_harmonic_sum.py
 │
-├── Exp4_HarmonicSum/
-│   ├── README.md             # 实验四：调和级数求和 说明
-│   ├── harmonic_sum.py       # 实验四：学生代码模板
+├── Exp5_SeriesComparison/        # 实验五：级数比较
+│   ├── 实验说明.md
+│   ├── 实验报告.md           # （需完成）
+│   ├── series_sum.py         # （需实现）
 │   ├── solution/
-│   │   └── harmonic_sum.py   # 实验四：参考答案
+│   │   └── series_sum_solution.py
 │   └── tests/
-│       └── test_harmonic.py  # 实验四：测试代码
+│       └── test_series_sum.py
 │
-├── Exp5_SeriesComparison/
-│   ├── README.md             # 实验五：不同形式级数求和 说明
-│   ├── series_sum.py         # 实验五：学生代码模板
-│   ├── solution/
-│   │   └── series_sum.py     # 实验五：参考答案
-│   └── tests/
-│       └── test_series.py    # 实验五：测试代码
-│
-└── Exp6_BesselRecursion/
-    ├── README.md             # 实验六：贝塞尔函数递推稳定性 说明
-    ├── bessel_recursion.py   # 实验六：学生代码模板
-    ├── solution/
-    │   └── bessel_recursion.py # 实验六：参考答案
-    └── tests/
-        └── test_bessel.py    # 实验六：测试代码
+└── Exp6_BesselRecursion/         # 实验六：贝塞尔函数
+├── 实验说明.md
+├── 实验报告.md           # （需完成）
+├── bessel_recursion.py   # （需实现）
+├── solution/
+│   └── bessel_recursion_solution.py
+└── tests/
+    └── test_bessel_recursion.py
 ```
