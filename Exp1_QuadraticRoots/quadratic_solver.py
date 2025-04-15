@@ -9,17 +9,10 @@ def standard_formula(a, b, c):
         c (float): 常数项
     
     返回:
-        tuple: 方程的两个根 (x1, x2)
+        tuple: 方程的两个根 (x1, x2) 或 None(无实根)
     """
-    discriminant = b * b - 4 * a * c
-    if discriminant < 0:
-        return None  # 无实根
-    
-    sqrt_discriminant = np.sqrt(discriminant)
-    x1 = (-b + sqrt_discriminant) / (2 * a)
-    x2 = (-b - sqrt_discriminant) / (2 * a)
-    
-    return x1, x2
+    # 学生在此处实现代码
+    pass
 
 def alternative_formula(a, b, c):
     """使用替代公式求解二次方程 ax^2 + bx + c = 0
@@ -31,17 +24,10 @@ def alternative_formula(a, b, c):
         c (float): 常数项
     
     返回:
-        tuple: 方程的两个根 (x1, x2)
+        tuple: 方程的两个根 (x1, x2) 或 None(无实根)
     """
-    discriminant = b * b - 4 * a * c
-    if discriminant < 0:
-        return None  # 无实根
-    
-    sqrt_discriminant = np.sqrt(discriminant)
-    x1 = (2 * c) / (-b - sqrt_discriminant)
-    x2 = (2 * c) / (-b + sqrt_discriminant)
-    
-    return x1, x2
+    # 学生在此处实现代码
+    pass
 
 def stable_formula(a, b, c):
     """稳定的二次方程求根程序，能够处理各种特殊情况和数值稳定性问题
@@ -52,28 +38,10 @@ def stable_formula(a, b, c):
         c (float): 常数项
     
     返回:
-        tuple: 方程的两个根 (x1, x2)
+        tuple: 方程的两个根 (x1, x2) 或 None(无实根)
     """
-    # 处理特殊情况：a = 0
-    if abs(a) < 1e-10:
-        if abs(b) < 1e-10:  # a ≈ 0 且 b ≈ 0
-            return None if abs(c) > 1e-10 else (0, 0)  # 无解或无穷多解
-        return (-c/b, -c/b)  # 一次方程的解
-    
-    discriminant = b * b - 4 * a * c
-    if discriminant < 0:
-        return None  # 无实根
-    
-    # 使用数值稳定的求根公式
-    sqrt_discriminant = np.sqrt(discriminant)
-    if b >= 0:
-        x1 = (-b - sqrt_discriminant) / (2 * a)
-        x2 = (2 * c) / (-b - sqrt_discriminant)
-    else:
-        x1 = (-b + sqrt_discriminant) / (2 * a)
-        x2 = (2 * c) / (-b + sqrt_discriminant)
-    
-    return x1, x2
+    # 学生在此处实现代码
+    pass
 
 def main():
     test_cases = [
