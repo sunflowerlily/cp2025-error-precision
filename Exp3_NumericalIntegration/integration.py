@@ -3,53 +3,32 @@ import matplotlib.pyplot as plt
 import time
 
 def f(x):
-    """
-    被积函数 f(x) = sqrt(1-x^2)
-    
-    参数:
-        x: 自变量值或数组
-    
-    返回:
-        函数值
-    """
-    # 在此实现 f(x) = sqrt(1-x^2)
-    pass
+    """被积函数 f(x) = sqrt(1-x^2)"""
+    return np.sqrt(1 - x**2)
 
 def rectangle_method(f, a, b, N):
-    """
-    矩形法（左矩形法）计算积分
+    """矩形法（左矩形法）计算积分"""
+    h = (b - a) / N
+    result = 0.0
     
-    参数:
-        f: 被积函数
-        a, b: 积分区间
-        N: 子区间数量
+    for k in range(1, N + 1):
+        x_k = a + h * (k - 1)  # 左端点
+        y_k = f(x_k)
+        result += h * y_k
     
-    返回:
-        积分近似值
-    """
-    # 在此实现矩形法（左矩形法）计算积分
-    # 1. 计算步长 h = (b-a)/N
-    # 2. 对每个子区间的左端点计算函数值并求和
-    pass
+    return result
 
 def trapezoid_method(f, a, b, N):
-    """
-    梯形法计算积分
+    """梯形法计算积分"""
+    h = (b - a) / N
+    result = 0.0
     
-    参数:
-        f: 被积函数
-        a, b: 积分区间
-        N: 子区间数量
+    for k in range(1, N + 1):
+        x_k_minus_1 = a + h * (k - 1)  # 左端点
+        x_k = a + h * k  # 右端点
+        result += 0.5 * h * (f(x_k_minus_1) + f(x_k))
     
-    返回:
-        积分近似值
-    """
-    # 在此实现梯形法计算积分
-    # 1. 计算步长 h = (b-a)/N
-    # 2. 计算首末项 0.5 * (f(a) + f(b))
-    # 3. 计算中间项之和
-    # 4. 用步长h乘以总和
-    pass
+    return result
 
 def calculate_errors(a, b, exact_value):
     """计算不同N值下各方法的误差"""
@@ -78,7 +57,7 @@ def plot_errors(h_values, rect_errors, trap_errors):
     
     # 绘制误差曲线
     plt.loglog(h_values, rect_errors, 'o-', label='Rectangle Method', alpha=0.5)
-    plt.loglog(h_values, trap_errors, 's--', label='Trapezoid Method', alpha=0.5)
+    plt.loglog(h_values, trap_errors, 's-', label='Trapezoid Method', alpha=0.5)
     
     # 添加参考线
     plt.loglog(h_values, np.array(h_values), '--', label='O(h)')
@@ -111,10 +90,50 @@ def print_results(N_values, rect_results, trap_results, exact_value):
         trap_error = abs((trap_results[i] - exact_value) / exact_value)
         print(f"{N_values[i]}\t{rect_error:.8e}\t{trap_error:.8e}")
 
+def time_performance_test(a, b, max_time=1.0):
+    """测试在限定时间内各方法能达到的最高精度"""
+    exact_value = 0.5 * np.pi
+    
+    methods = [
+        ("Rectangle Method", rectangle_method),
+        ("Trapezoid Method", trapezoid_method)
+    ]
+    
+    print(f"\n在{max_time}秒内各方法能达到的最高精度:")
+    print("方法\t\tN\t\t结果\t\t相对误差\t运行时间(秒)")
+    print("-" * 80)
+    
+    for name, method in methods:
+        N = 10
+        while True:
+            start_time = time.time()
+            result = method(f, a, b, N)
+            end_time = time.time()
+            
+            elapsed = end_time - start_time
+            error = abs((result - exact_value) / exact_value)
+            
+            if elapsed > max_time / 10:
+                print(f"{name}\t{N}\t{result:.8f}\t{error:.8e}\t{elapsed:.6f}")
+                break
+            
+            N *= 2
+
+def calculate_convergence_rate(h_values, errors):
+    """计算收敛阶数"""
+    log_h = np.log(h_values)
+    log_error = np.log(errors)
+    
+    n = len(h_values)
+    slope = (n * np.sum(log_h * log_error) - np.sum(log_h) * np.sum(log_error)) / \
+            (n * np.sum(log_h**2) - np.sum(log_h)**2)
+    
+    return slope
+
 def main():
     """主函数"""
-    a, b = 0, 1.0  # 积分区间
-    exact_value = 0.25 * np.pi  # 精确值
+    a, b = -1.0, 1.0  # 积分区间
+    exact_value = 0.5 * np.pi  # 精确值
     
     print(f"计算积分 ∫_{a}^{b} √(1-x²) dx")
     print(f"精确值: {exact_value:.10f}")
@@ -136,6 +155,17 @@ def main():
     
     # 绘制误差图
     plot_errors(h_values, rect_errors, trap_errors)
+    
+    # 计算收敛阶数
+    rect_rate = calculate_convergence_rate(h_values, rect_errors)
+    trap_rate = calculate_convergence_rate(h_values, trap_errors)
+    
+    print("\n收敛阶数分析:")
+    print(f"矩形法: {rect_rate:.2f}")
+    print(f"梯形法: {trap_rate:.2f}")
+    
+    # 时间性能测试
+    time_performance_test(a, b)
 
 if __name__ == "__main__":
     main()
