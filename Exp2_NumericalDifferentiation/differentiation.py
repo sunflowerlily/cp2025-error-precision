@@ -2,73 +2,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def f(x):
-    """
-    定义测试函数 f(x) = x(x-1)
-    
-    参数:
-        x: 自变量值
-    
-    返回:
-        函数值 f(x)
-    """
-    # 在此实现函数 f(x) = x(x-1)
-    pass
+    """定义测试函数 f(x) = x(x-1)"""
+    return x * (x - 1)
 
 def forward_diff(f, x, delta):
-    """
-    前向差分法计算导数
-    
-    参数:
-        f: 待求导函数
-        x: 求导点
-        delta: 步长
-    
-    返回:
-        在点x处的导数近似值
-    """
-    # 在此实现前向差分公式: (f(x+delta) - f(x))/delta
-    pass
+    """前向差分法计算导数"""
+    return (f(x + delta) - f(x)) / delta
 
 def central_diff(f, x, delta):
-    """
-    中心差分法计算导数
-    
-    参数:
-        f: 待求导函数
-        x: 求导点
-        delta: 步长
-    
-    返回:
-        在点x处的导数近似值
-    """
-    # 在此实现中心差分公式: (f(x+delta) - f(x-delta))/(2*delta)
-    pass
+    """中心差分法计算导数"""
+    return (f(x + delta) - f(x - delta)) / (2 * delta)
 
 def analytical_derivative(x):
-    """
-    解析导数 f'(x) = 2x - 1
-    
-    参数:
-        x: 求导点
-    
-    返回:
-        在点x处的导数精确值
-    """
-    # 在此实现解析导数 f'(x) = 2x - 1
-    pass
+    """解析导数 f'(x) = 2x - 1"""
+    return 2 * x - 1
 
 def calculate_errors(x_point=1.0):
-    """
-    计算不同步长下的误差
-    
-    参数:
-        x_point: 计算导数的点，默认为1.0
-    
-    返回:
-        deltas: 步长数组
-        forward_errors: 前向差分相对误差数组
-        central_errors: 中心差分相对误差数组
-    """
+    """计算不同步长下的误差"""
     # 步长序列
     deltas = np.logspace(-14, -2, 13)
     
@@ -81,26 +31,20 @@ def calculate_errors(x_point=1.0):
     
     # 计算不同步长下的误差
     for delta in deltas:
-        # 1. 计算前向差分近似值
-        # 2. 计算前向差分相对误差
-        # 3. 添加到forward_errors列表
+        # 前向差分
+        forward_value = forward_diff(f, x_point, delta)
+        forward_rel_error = abs((forward_value - true_value) / true_value)
+        forward_errors.append(forward_rel_error)
         
-        # 4. 计算中心差分近似值
-        # 5. 计算中心差分相对误差
-        # 6. 添加到central_errors列表
-        pass
+        # 中心差分
+        central_value = central_diff(f, x_point, delta)
+        central_rel_error = abs((central_value - true_value) / true_value)
+        central_errors.append(central_rel_error)
     
     return deltas, forward_errors, central_errors
 
 def plot_errors(deltas, forward_errors, central_errors):
-    """
-    绘制误差-步长关系图
-    
-    参数:
-        deltas: 步长数组
-        forward_errors: 前向差分相对误差数组
-        central_errors: 中心差分相对误差数组
-    """
+    """绘制误差-步长关系图"""
     plt.figure(figsize=(10, 6))
     
     # 绘制前向差分误差
@@ -114,7 +58,7 @@ def plot_errors(deltas, forward_errors, central_errors):
     plt.loglog(deltas, np.array(deltas)**2, '--', label='Second Order O($h^2$)')
     
     # 设置图表
-    plt.xlabel('Step Size $\\delta$')
+    plt.xlabel('Step Size $\\delta$')  # Fixed escape sequence
     plt.ylabel('Relative Error')
     plt.title('Error vs Step Size in Numerical Differentiation')
     plt.grid(True, which="both", ls="-")
@@ -125,14 +69,7 @@ def plot_errors(deltas, forward_errors, central_errors):
     plt.show()
 
 def print_results(deltas, forward_errors, central_errors):
-    """
-    打印计算结果表格
-    
-    参数:
-        deltas: 步长数组
-        forward_errors: 前向差分相对误差数组
-        central_errors: 中心差分相对误差数组
-    """
+    """打印计算结果表格"""
     print("步长(δ)\t前向差分误差\t中心差分误差")
     print("-" * 50)
     
@@ -154,10 +91,22 @@ def main():
     plot_errors(deltas, forward_errors, central_errors)
     
     # 分析最优步长
-    # 提示: 使用np.argmin找到误差最小的索引
+    forward_best_idx = np.argmin(forward_errors)
+    central_best_idx = np.argmin(central_errors)
+    
+    print("\n最优步长分析:")
+    print(f"前向差分最优步长: {deltas[forward_best_idx]:.2e}, 相对误差: {forward_errors[forward_best_idx]:.6e}")
+    print(f"中心差分最优步长: {deltas[central_best_idx]:.2e}, 相对误差: {central_errors[central_best_idx]:.6e}")
     
     # 分析收敛阶数
-    # 提示: 使用对数关系计算斜率
+    print("\n收敛阶数分析:")
+    # 选择中间区域的点进行斜率计算，避开舍入误差主导区域
+    mid_idx = len(deltas) // 2
+    forward_slope = np.log(forward_errors[mid_idx] / forward_errors[mid_idx-2]) / np.log(deltas[mid_idx] / deltas[mid_idx-2])
+    central_slope = np.log(central_errors[mid_idx] / central_errors[mid_idx-2]) / np.log(deltas[mid_idx] / deltas[mid_idx-2])
+    
+    print(f"前向差分收敛阶数约为: {forward_slope:.2f}")
+    print(f"中心差分收敛阶数约为: {central_slope:.2f}")
 
 if __name__ == "__main__":
     main()
