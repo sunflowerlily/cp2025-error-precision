@@ -2,34 +2,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def sum_up(N):
-    """
-    从小到大计算调和级数和
-    
-    参数:
-        N: 项数
-    
-    返回:
-        调和级数和
-    """
-    # 在此实现从小到大求和
-    # 1. 初始化结果为0
-    # 2. 从1到N循环，累加1/n
-    pass
+    """从小到大计算调和级数和"""
+    result = 0.0
+    for n in range(1, N + 1):
+        result += 1.0 / n
+    return result
 
 def sum_down(N):
-    """
-    从大到小计算调和级数和
-    
-    参数:
-        N: 项数
-    
-    返回:
-        调和级数和
-    """
-    # 在此实现从大到小求和
-    # 1. 初始化结果为0
-    # 2. 从N到1循环，累加1/n
-    pass
+    """从大到小计算调和级数和"""
+    result = 0.0
+    for n in range(N, 0, -1):
+        result += 1.0 / n
+    return result
 
 def calculate_relative_difference(N):
     """计算两种方法的相对差异"""
