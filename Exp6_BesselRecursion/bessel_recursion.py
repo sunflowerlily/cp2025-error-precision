@@ -12,11 +12,19 @@ def bessel_up(x, lmax):
     Returns:
         numpy.ndarray, 从0到lmax阶的球贝塞尔函数值
     """
-    # 在此实现向上递推算法
-    # 1. 初始化结果数组
-    # 2. 计算j_0(x)和j_1(x)作为初始值
-    # 3. 使用递推公式计算高阶函数值
-    pass
+    # 初始化结果数组
+    j = np.zeros(lmax + 1)
+    
+    # 计算初始值
+    j[0] = np.sin(x) / x if x != 0 else 1.0  # j_0(x)
+    if lmax > 0:
+        j[1] = np.sin(x) / x**2 - np.cos(x) / x  # j_1(x)
+    
+    # 向上递推
+    for l in range(1, lmax):
+        j[l+1] = (2*l + 1) / x * j[l] - j[l-1]
+    
+    return j
 
 def bessel_down(x, lmax, m_start=None):
     """向下递推计算球贝塞尔函数
@@ -29,13 +37,28 @@ def bessel_down(x, lmax, m_start=None):
     Returns:
         numpy.ndarray, 从0到lmax阶的球贝塞尔函数值
     """
-    # 在此实现向下递推算法
-    # 1. 设置合适的起始阶数m_start
-    # 2. 初始化临时数组
-    # 3. 设置初始值j_{m_start+1}和j_{m_start}
-    # 4. 向下递推计算
-    # 5. 使用j_0(x)进行归一化
-    pass
+    if m_start is None:
+        m_start = lmax + 15
+    
+    # 初始化临时数组，用于向下递推
+    j_temp = np.zeros(m_start + 2)
+    
+    # 设置初始值
+    j_temp[m_start+1] = 0.0
+    j_temp[m_start] = 1.0
+    
+    # 向下递推
+    for l in range(m_start, 0, -1):
+        j_temp[l-1] = (2*l + 1) / x * j_temp[l] - j_temp[l+1]
+    
+    # 计算解析的j_0(x)用于归一化
+    j0_analytic = np.sin(x) / x if x != 0 else 1.0
+    
+    # 归一化
+    scale = j0_analytic / j_temp[0]
+    j = j_temp[:lmax+1] * scale
+    
+    return j
 
 def plot_comparison(x, lmax):
     """绘制不同方法计算结果的比较图
