@@ -5,29 +5,29 @@ def sum_S1(N):
     """计算第一种形式的级数和：交错级数
     S_N^(1) = sum_{n=1}^{2N} (-1)^n * n/(n+1)
     """
-    # 在此实现交错级数求和
-    # 1. 初始化结果为0
-    # 2. 从1到2N循环，累加(-1)^n * n/(n+1)
-    pass
+    result = 0.0
+    for n in range(1, 2*N + 1):
+        result += (-1)**n * n / (n + 1)
+    return result
 
 def sum_S2(N):
     """计算第二种形式的级数和：两项求和相减
     S_N^(2) = -sum_{n=1}^N (2n-1)/(2n) + sum_{n=1}^N (2n)/(2n+1)
     """
-    # 在此实现两项求和相减
-    # 1. 初始化两个和为0
-    # 2. 从1到N循环，分别计算两个和
-    # 3. 返回两个和的差
-    pass
+    sum1 = sum2 = 0.0
+    for n in range(1, N + 1):
+        sum1 += (2*n - 1) / (2*n)
+        sum2 += (2*n) / (2*n + 1)
+    return -sum1 + sum2
 
 def sum_S3(N):
     """计算第三种形式的级数和：直接求和
     S_N^(3) = sum_{n=1}^N 1/(2n(2n+1))
     """
-    # 在此实现直接求和
-    # 1. 初始化结果为0
-    # 2. 从1到N循环，累加1/(2n(2n+1))
-    pass
+    result = 0.0
+    for n in range(1, N + 1):
+        result += 1.0 / (2*n * (2*n + 1))
+    return result
 
 def calculate_relative_errors(N_values):
     """计算相对误差"""
