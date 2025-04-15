@@ -12,12 +12,12 @@ from pathlib import Path
 
 # 定义测试文件和分数
 TESTS = [
-    {"name": "实验一: 二次方程求根稳定性", "file": "Exp1_QuadraticRoots/tests/test_quadratic.py", "points": 25},
-    {"name": "实验二: 数值微分误差权衡", "file": "Exp2_NumericalDifferentiation/tests/test_differentiation.py", "points": 15},
-    {"name": "实验三: 数值积分收敛性", "file": "Exp3_NumericalIntegration/tests/test_integration.py", "points": 15},
-    {"name": "实验四: 调和级数求和顺序", "file": "Exp4_HarmonicSum/tests/test_harmonic_sum.py", "points": 14},
-    {"name": "实验五: 不同形式级数比较", "file": "Exp5_SeriesComparison/tests/test_series_sum.py", "points": 20},
-    {"name": "实验六: 贝塞尔函数递推稳定性", "file": "Exp6_BesselRecursion/tests/test_bessel_recursion.py", "points": 20}
+    {"name": "实验一: 二次方程求根稳定性", "file": "Exp1_QuadraticRoots/tests/test_quadratic.py", "points": 10},
+    {"name": "实验二: 数值微分误差权衡", "file": "Exp2_NumericalDifferentiation/tests/test_differentiation.py", "points": 10},
+    {"name": "实验三: 数值积分收敛性", "file": "Exp3_NumericalIntegration/tests/test_integration.py", "points": 10},
+    {"name": "实验四: 调和级数求和顺序", "file": "Exp4_HarmonicSum/tests/test_harmonic_sum.py", "points": 10},
+    {"name": "实验五: 不同形式级数比较", "file": "Exp5_SeriesComparison/tests/test_series_sum.py", "points": 10},
+    {"name": "实验六: 贝塞尔函数递推稳定性", "file": "Exp6_BesselRecursion/tests/test_bessel_recursion.py", "points": 10}
 ]
 
 def run_test(test_file):
